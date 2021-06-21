@@ -25,7 +25,6 @@ export default class Starship extends Entity {
         if(this.attacking) return false;
 
         let laserSound = new Audio('../media/sounds/laser.mp3');
-        laserSound.volume = 1;
         laserSound.play();
 
         this.attacking = true;

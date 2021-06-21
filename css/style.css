@@ -21,7 +21,14 @@ canvas {
     background-color: #111;
 }
 
-#startScreen {
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.startScreen {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -31,12 +38,40 @@ canvas {
     background-size: 30%;
 }
 
-#pauseScreen {
+.pauseScreen {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
     background-color: rgba(0, 0, 0, .75);
+}
+
+.menu__item {
+    margin: 20px 0;
+}
+
+.menu__item button {
+    margin: 0;
+        padding: 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-family: PressStart2P;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.menu__item button:hover {
+    color: red;
+}
+
+.pauseScreen__settings-menu {
+    display: none;
 }

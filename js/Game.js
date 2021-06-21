@@ -55,13 +55,16 @@ export default class Game {
     static loop()
     {
 
-        if( !Game.paused ) {
+        if( !Game.paused && Game.started ) {
 
             Game.movement();
             Game.collisions();
-            Game.render();
+
+            if( Starship.health <= 0) Game.end();
 
         }
+
+        Game.render();
 
         requestAnimationFrame(Game.loop);
 
@@ -89,11 +92,11 @@ export default class Game {
 
         // UFOs
         let UFOsImage = new Image();
-        UFOsImage.src = UFO.skin;
 
         UFO.list.forEach( ufo => {
             this.ctx.fillStyle = 'red';
             this.ctx.fillRect(ufo.x, ufo.y - 20, ufo.health, 3);
+            UFOsImage.src = ufo.skin;
             this.ctx.drawImage(UFOsImage, ufo.x, ufo.y, ufo.w, ufo.h);
         })
 
@@ -196,11 +199,12 @@ export default class Game {
 
             // With starship
             if(collision(Starship, ufo)) {
+
                 Starship.health -= UFO.damage;
 
-                if(Starship.health <= 0) this.end();
-                else if(Starship.health <= 25) Starship.skin = '../media/images/starship_h25.png';
+                if(Starship.health <= 25) Starship.skin = '../media/images/starship_h25.png';
                 else if(Starship.health <= 75) Starship.skin = '../media/images/starship_h75.png';
+
             }
 
             // With laser
@@ -209,19 +213,16 @@ export default class Game {
                 ufo.x < Starship.x+Starship.w/2 &&
                 ufo.x + ufo.w > Starship.x+Starship.w/2
             ) {
-                ufo.health -= Starship.damage
                 if(ufo.health <= 0) {
                     Starship.points++;
-                    UFO.destroy(i);
-                }
+                    UFO.destroy(i, ufo);
+                } else ufo.health -= Starship.damage;
             }
 
         });
 
         Blackhole.list.forEach( blackhole => {
-            if(collision(Starship, blackhole)) {
-                this.end();
-            }
+            if(collision(Starship, blackhole)) Starship.health -= Blackhole.damage;
 
             UFO.list.forEach( (ufo, i) => {
                 if(collision(blackhole, ufo)) {
@@ -256,11 +257,6 @@ export default class Game {
 
     }
 
-    static store()
-    {
-
-    }
-
     static pause()
     {
 
@@ -290,13 +286,13 @@ export default class Game {
 
         if ( !this.started ) return false;
 
+        Starship.skin = '../media/images/explosion.png';
         Starship.health = 0;
         Starship.w = 200;
         Starship.h = 200;
 
         this.started = false;
 
-        Starship.skin = '../media/images/explosion.png';
         (new Audio('../media/sounds/explosion.mp3')).play();
         setTimeout(()=>window.location.reload(), 1500);
 

@@ -11,6 +11,8 @@ export default class Blackhole extends Entity {
     static w = 125;
     static h = 125;
 
+    static damage = 25;
+
     static speed = 2;
 
     constructor(x, y) {
