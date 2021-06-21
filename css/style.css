@@ -1,0 +1,42 @@
+@font-face {
+font-family: PressStart2P;
+font-style: normal;
+src: url("../media/fonts/PressStart2P.ttf");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: PressStart2P, sans-serif;
+}
+
+canvas {
+    display: block;
+    background-color: #111;
+}
+
+#startScreen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #222 url("../media/images/press_start.png") center no-repeat;
+    background-size: 30%;
+}
+
+#pauseScreen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, .75);
+}
