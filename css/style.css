@@ -28,6 +28,22 @@ ul {
     text-align: center;
 }
 
+button {
+    margin: 0;
+        padding: 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-family: PressStart2P;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: red;
+}
+
 .startScreen {
     position: absolute;
     top: 0;
@@ -56,22 +72,10 @@ ul {
     margin: 20px 0;
 }
 
-.menu__item button {
-    margin: 0;
-        padding: 10px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: white;
-    font-family: PressStart2P;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.menu__item button:hover {
-    color: red;
-}
-
 .pauseScreen__settings-menu {
+    display: none;
+}
+
+.pauseScreen__store {
     display: none;
 }

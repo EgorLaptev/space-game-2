@@ -1,6 +1,7 @@
 'use strict';
 
 import Entity from "./Entity.js";
+import Game from "./Game.js";
 
 export default class UFO extends Entity {
 
@@ -18,10 +19,10 @@ export default class UFO extends Entity {
     static w = 125;
     static h = 60;
 
-    static destroy(index, ufo)
+    static destroy(index)
     {
         this.list.splice(index, 1);
-        (new Audio('../media/sounds/explosion.mp3')).play();
+        (new Audio(Game.explosionSound)).play();
     }
 
     constructor(x, y) {

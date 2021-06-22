@@ -8,6 +8,7 @@ const menu = document.getElementById('pauseMenu'),
       settings  = document.getElementById('menu__settings');
 
 const settingsMenu      = document.getElementById('settingsMenu'),
+      storeMenu         = document.getElementById('storeMenu'),
       backgroundVolume  = document.getElementById('backgroundVolume');
 
 const menuBack = document.querySelectorAll('.menu__back');
@@ -17,7 +18,8 @@ resume.addEventListener('click', evt => {
 });
 
 store.addEventListener('click', evt => {
-
+    menu.style.display = 'none';
+    storeMenu.style.display = 'grid';
 });
 
 settings.addEventListener('click', evt => {
@@ -31,7 +33,7 @@ backgroundVolume.addEventListener('input', evt => {
 
 menuBack.forEach( back => {
     back.addEventListener('click', evt => {
-        back.parentNode.parentNode.style.display = 'none';
+        back.parentNode.style.display = 'none';
         menu.style.display = 'block';
     });
 });

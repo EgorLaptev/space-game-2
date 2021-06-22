@@ -11,7 +11,7 @@ Game.cnv.height = window.innerHeight;
 
 let startScreen = document.getElementById('startScreen');
 
-document.addEventListener('keydown', evt => {
+document.addEventListener('click', evt => {
 
     if(!Game.started) {
         startScreen.style.display = 'none';

@@ -3,8 +3,8 @@
 import random from "./random.js";
 import collision from "./collision.js";
 
-import Starship from "./Starship.js";
 import UFO from "./UFO.js";
+import Starship from "./Starship.js";
 import Blackhole from "./Blackhole.js";
 
 export default class Game {
@@ -15,6 +15,8 @@ export default class Game {
     static started = false;
     static paused  = false;
 
+    static laserSound = '../media/sounds/laser.m3';
+    static explosionSound = '../media/sounds/explosion.mp3';
     static bgSound = new Audio('../media/sounds/bg.mp3');
     static bgImage = {
         src: '../media/images/bg.jpg',
@@ -174,12 +176,13 @@ export default class Game {
 
         // UFOs
         UFO.list.forEach( (ufo, i) => {
-           ufo.y += ufo.speedY;
-           ufo.x += ufo.speedX;
 
-           if(ufo.x <= 0 || ufo.x + ufo.w >= this.cnv.width) ufo.speedX = -ufo.speedX;
+            ufo.y += ufo.speedY;
+            ufo.x += ufo.speedX;
 
-           if(ufo.y >= this.cnv.height) UFO.list.splice(i, 1);
+            if(ufo.x <= 0 || ufo.x + ufo.w >= this.cnv.width) ufo.speedX = -ufo.speedX;
+
+            if(ufo.y >= this.cnv.height) UFO.list.splice(i, 1);
 
         });
 
@@ -198,14 +201,7 @@ export default class Game {
         UFO.list.forEach( (ufo, i) => {
 
             // With starship
-            if(collision(Starship, ufo)) {
-
-                Starship.health -= UFO.damage;
-
-                if(Starship.health <= 25) Starship.skin = '../media/images/starship_h25.png';
-                else if(Starship.health <= 75) Starship.skin = '../media/images/starship_h75.png';
-
-            }
+            if(collision(Starship, ufo)) Starship.health -= UFO.damage;
 
             // With laser
             if(
@@ -215,20 +211,20 @@ export default class Game {
             ) {
                 if(ufo.health <= 0) {
                     Starship.points++;
-                    UFO.destroy(i, ufo);
+                    UFO.destroy(i);
                 } else ufo.health -= Starship.damage;
             }
 
         });
 
         Blackhole.list.forEach( blackhole => {
+
+            // With starship
             if(collision(Starship, blackhole)) Starship.health -= Blackhole.damage;
 
+            // With UFO
             UFO.list.forEach( (ufo, i) => {
-                if(collision(blackhole, ufo)) {
-                    (new Audio('../media/sounds/explosion.mp3')).play();
-                    UFO.list.splice(i, 1);
-                }
+                if(collision(blackhole, ufo)) UFO.destroy(i);
             })
 
         });
@@ -293,7 +289,7 @@ export default class Game {
 
         this.started = false;
 
-        (new Audio('../media/sounds/explosion.mp3')).play();
+        (new Audio(this.explosionSound)).play();
         setTimeout(()=>window.location.reload(), 1500);
 
     }
