@@ -6,7 +6,7 @@ export default class Blackhole extends Entity {
 
     static list = [];
 
-    static skin = '../media/images/blackhole.png';
+    static skin = '../media/images/enemies/blackhole.png';
 
     static w = 125;
     static h = 125;

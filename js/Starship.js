@@ -14,7 +14,7 @@ export default class Starship extends Entity {
 
     static health = 100;
 
-    static skin = '../media/images/starship_6.png';
+    static skin = '../media/images/starships/starship_6.png';
     static laserColor = 'red';
 
     static attacking = false;

@@ -7,7 +7,7 @@ export default class UFO extends Entity {
 
     static list = [];
 
-    skin  = '../media/images/ufo.png';
+    skin  = '../media/images/enemies/ufo.png';
 
     speedX = 2;
     speedY = 3;
